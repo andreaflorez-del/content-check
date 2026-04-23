@@ -133,7 +133,7 @@ function evaluateEntendimientoLocally(
         : `Hay demasiado texto para procesar antes de llegar a la acción. Es fácil que me pierda o abandone sin leer lo importante.`,
       suggestion: isEducational
         ? 'Dividir en secciones cortas con encabezados descriptivos. Priorizar los 3 conceptos clave que el usuario debe retener.'
-        : 'Reducir el cuerpo a lo mínimo necesario. El objetivo es que el usuario entienda de inmediato qué se espera de él.',
+        : 'Reducir el cuerpo a lo mínimo necesario. El objetivo es que la persona usuaria entienda de inmediato qué se espera.',
     });
   }
 
@@ -185,7 +185,7 @@ function evaluateEntendimientoLocally(
       potentialConfusions.push({
         element: 'Alineación con el objetivo',
         issue: `El objetivo declarado es "${ex(context.objective, 70)}" pero el contenido no parece abordarlo directamente. Me cuesta conectar lo que leo con lo que se supone que debo aprender.`,
-        suggestion: 'Revisar que el título y el primer párrafo hagan explícito el tema del objetivo. El usuario no puede leer la mente del autor.',
+        suggestion: 'Revisar que el título y el primer párrafo hagan explícito el tema del objetivo. La persona usuaria no puede leer la mente de quien escribe.',
       });
     }
   }
@@ -196,7 +196,7 @@ function evaluateEntendimientoLocally(
     if (primaryCTA) {
       callToAction = `Veo el texto "${primaryCTA}". En un contenido educativo, los CTAs secundarios deben invitar a explorar más (ej: "Ver más sobre X") o a poner en práctica lo aprendido (ej: "Ir a Productos de catálogo"). "${primaryCTA}" ${/^[A-ZÁÉÍÓÚ][a-záéíóúü]+(ar|er|ir)\b/.test(primaryCTA) ? 'cumple con eso.' : 'podría ser más específico.'}`;
     } else {
-      callToAction = 'No encontré un CTA claro. En contenido educativo, al final es útil tener un paso concreto que el usuario pueda dar para aplicar lo que aprendió.';
+      callToAction = 'No encontré un CTA claro. En contenido educativo, al final es útil tener un paso concreto que la persona usuaria pueda dar para aplicar lo que aprendió.';
     }
   } else if (primaryCTA) {
     if (/^(Ver|Más|Siguiente|OK|Si$|No$)\b/i.test(primaryCTA)) {
@@ -226,7 +226,7 @@ const ENTENDIMIENTO_PROMPT = `Eres una persona usuaria promedio de Mercado Libre
 
 El equipo de diseño te dará contexto sobre qué tipo de pieza es y qué objetivo tiene. Usá ese contexto para enfocar tu evaluación.
 
-Tu análisis debe responder desde la perspectiva del usuario:
+Tu análisis debe responder desde la perspectiva de la persona usuaria:
 - ¿Qué entiendo al leer este contenido?
 - ¿El contenido cumple con lo que el equipo quiere que yo entienda o haga?
 - ¿Qué mensajes clave recibo?
@@ -236,13 +236,13 @@ Tu análisis debe responder desde la perspectiva del usuario:
 Responde ÚNICAMENTE con este JSON, sin texto adicional:
 {
   "overallClarity": "clear|moderate|confusing",
-  "userSummary": "1-2 oraciones en primera persona describiendo qué entiende el usuario al leer este contenido",
+  "userSummary": "1-2 oraciones en primera persona describiendo qué entiende la persona usuaria al leer este contenido",
   "firstImpression": "1-2 oraciones sobre qué captura la atención primero y qué mensaje comunica",
   "keyMessages": ["mensaje 1", "mensaje 2", "mensaje 3"],
   "potentialConfusions": [
     {
       "element": "nombre del elemento que genera confusión",
-      "issue": "descripción del problema de comprensión desde la perspectiva del usuario",
+      "issue": "descripción del problema de comprensión desde la perspectiva de la persona usuaria",
       "suggestion": "recomendación concreta para clarificarlo"
     }
   ],

@@ -58,8 +58,8 @@ function analyzeStorytellingLocally(layers: TextLayer[]): StorytellingResult {
   if (primaryTitle && /^(¿Qué (es|son)|¿Cómo funciona|Información|Descripción|Acerca de|Introducción a)/i.test(primaryTitle)) {
     issues.push({
       dimension: 'Apertura narrativa',
-      finding: `"${ex(primaryTitle)}" — el título de apertura describe el sistema en lugar de conectar con la motivación del usuario.`,
-      recommendation: 'Storytelling: el hook de apertura debe comunicar el beneficio principal desde la primera línea. En lugar de "¿Qué es X?", usar "Con X puedes [beneficio concreto para el usuario]".',
+      finding: `"${ex(primaryTitle)}" — el título de apertura describe el sistema en lugar de conectar con la motivación de la persona usuaria.`,
+      recommendation: 'Storytelling: el hook de apertura debe comunicar el beneficio principal desde la primera línea. En lugar de "¿Qué es X?", usar "Con X puedes [beneficio concreto para la persona usuaria]".',
       severity: 'warning',
     });
   }
@@ -68,7 +68,7 @@ function analyzeStorytellingLocally(layers: TextLayer[]): StorytellingResult {
   if (questions.length >= 2) {
     issues.push({
       dimension: 'Continuidad narrativa',
-      finding: `Se detectaron ${questions.length} secciones de pregunta (ej: "${ex(questions[0], 50)}"). Las FAQs interrumpen el flujo narrativo y obligan al usuario a buscar lo que le es relevante.`,
+      finding: `Se detectaron ${questions.length} secciones de pregunta (ej: "${ex(questions[0], 50)}"). Las FAQs interrumpen el flujo narrativo y obligan a la persona usuaria a buscar lo que le es relevante.`,
       recommendation: 'Storytelling: reorganizar el contenido como flujo lineal de beneficios. Las preguntas frecuentes funcionan mejor en una sección de ayuda separada, fuera del flujo de conversión principal.',
       severity: questions.length >= 3 ? 'warning' : 'info',
     });
@@ -78,7 +78,7 @@ function analyzeStorytellingLocally(layers: TextLayer[]): StorytellingResult {
   if (texts.length > 10) {
     issues.push({
       dimension: 'Compromiso emocional — Conductual',
-      finding: `La pantalla contiene ${texts.length} bloques de texto. La alta densidad puede generar fatiga cognitiva antes de que el usuario llegue al momento de acción principal.`,
+      finding: `La pantalla contiene ${texts.length} bloques de texto. La alta densidad puede generar fatiga cognitiva antes de que la persona usuaria llegue al momento de acción principal.`,
       recommendation: 'Storytelling (NNG): aplicar pirámide invertida. Los 3 beneficios más importantes al inicio; el resto, detrás de un "ver más" o en pantallas de ayuda complementarias.',
       severity: 'warning',
     });
@@ -89,7 +89,7 @@ function analyzeStorytellingLocally(layers: TextLayer[]): StorytellingResult {
   if (!addressesUser && bodyTexts.length > 0) {
     issues.push({
       dimension: 'Compromiso emocional — Visceral',
-      finding: `"${ex(bodyTexts[0], 60)}" — el texto habla sobre el producto sin dirigirse directamente al usuario.`,
+      finding: `"${ex(bodyTexts[0], 60)}" — el texto habla sobre el producto sin dirigirse directamente a la persona usuaria.`,
       recommendation: 'Storytelling: usar "tú" y verbos en segunda persona crea conexión emocional directa. En lugar de "La sección permite...", usar "Desde aquí puedes...".',
       severity: 'warning',
     });
@@ -105,7 +105,7 @@ function analyzeStorytellingLocally(layers: TextLayer[]): StorytellingResult {
     issues.push({
       dimension: 'Estructura narrativa — Clímax',
       finding: 'No se detectó un CTA claro que represente el "momento aha" del flujo.',
-      recommendation: 'Storytelling: toda pantalla necesita un clímax — una acción principal que resuelva la necesidad que motivó al usuario. El CTA debe reflejar el beneficio principal anunciado en el título.',
+      recommendation: 'Storytelling: toda pantalla necesita un clímax — una acción principal que resuelva la necesidad que motivó a la persona usuaria. El CTA debe reflejar el beneficio principal anunciado en el título.',
       severity: 'warning',
     });
   }
@@ -135,12 +135,12 @@ function analyzeStorytellingLocally(layers: TextLayer[]): StorytellingResult {
 
   let summary: string;
   if (issues.length === 0) {
-    summary = 'El contenido tiene una coherencia narrativa sólida. La apertura conecta con el usuario, la jerarquía informativa es clara y hay un CTA bien definido.';
+    summary = 'El contenido tiene una coherencia narrativa sólida. La apertura conecta con la persona usuaria, la jerarquía informativa es clara y hay un CTA bien definido.';
   } else if (overallScore === 'fair') {
     const dims = issues.filter(i => i.severity !== 'info').map(i => i.dimension).slice(0, 2).join(' y ');
-    summary = `El contenido tiene una estructura básica con oportunidades de mejora en ${dims}. Algunos elementos pueden dificultar que el usuario llegue al momento clave del flujo.`;
+    summary = `El contenido tiene una estructura básica con oportunidades de mejora en ${dims}. Algunos elementos pueden dificultar que la persona usuaria llegue al momento clave del flujo.`;
   } else {
-    summary = `El flujo presenta ${issues.length} oportunidad${issues.length === 1 ? '' : 'es'} de mejora narrativa que pueden afectar el engagement emocional del usuario antes del CTA principal.`;
+    summary = `El flujo presenta ${issues.length} oportunidad${issues.length === 1 ? '' : 'es'} de mejora narrativa que pueden afectar el engagement emocional de la persona usuaria antes del CTA principal.`;
   }
 
   return { overallScore, flowName, summary, issues };
@@ -150,7 +150,7 @@ const STORYTELLING_PROMPT = `Eres un asesor senior de UX Writing de Mercado Libr
 Tu análisis integra tres marcos de referencia:
   1. Manual de Estilo MELI (voz, tono, glosario, reglas de escritura)
   2. Investigación NNG (jerarquía informativa, scannability, plain language)
-  3. Storytelling en UX — Bruno Dias / Donald Norman (viaje emocional del usuario, estructura narrativa)
+  3. Storytelling en UX — Bruno Dias / Donald Norman (viaje emocional de la persona usuaria, estructura narrativa)
 
 Analiza la coherencia narrativa del flujo de pantallas según estas dimensiones:
 
@@ -174,7 +174,7 @@ DIMENSIONES DE ANÁLISIS:
 4. Compromiso emocional (Storytelling — Donald Norman)
    Nivel visceral: ¿el texto genera confianza en la primera impresión?
    Nivel conductual: ¿el copy reduce fricción durante el uso?
-   Nivel reflexivo: ¿el usuario se identifica con la voz de la marca al finalizar?
+   Nivel reflexivo: ¿la persona usuaria se identifica con la voz de la marca al finalizar?
 
 5. Continuidad narrativa (Storytelling + MELI)
    ¿Hay un hilo conductor claro de inicio a fin?

@@ -13,7 +13,7 @@ const FEATURES: Array<{
     id: 'analizar',
     icon: '🔍',
     title: 'Analizar contenido',
-    description: 'Detecta oportunidades de mejora según el Manual de Estilo MELI',
+    description: 'Detecta oportunidades de mejora según el Manual de estilo MELI y las heurísticas de usabilidad',
     hint: 'Selecciona una pantalla o frame',
   },
   {
@@ -49,12 +49,6 @@ export function HomeMenu({ onSelect, layerCount }: Props) {
 
   return (
     <div style={styles.container}>
-      <p style={styles.selectionHint}>
-        {layerCount > 0
-          ? `${layerCount} ${layerCount === 1 ? 'layer seleccionado' : 'layers seleccionados'} en el canvas`
-          : 'Selecciona elementos en el canvas para comenzar'}
-      </p>
-
       <div style={styles.list}>
         {FEATURES.map((f) => (
           <button
@@ -72,7 +66,6 @@ export function HomeMenu({ onSelect, layerCount }: Props) {
             <div style={styles.cardBody}>
               <div style={styles.cardTitle}>{f.title}</div>
               <div style={styles.cardDesc}>{f.description}</div>
-              <div style={styles.cardHint}>{f.hint}</div>
             </div>
             <span style={styles.arrow}>›</span>
           </button>

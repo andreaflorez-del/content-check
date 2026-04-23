@@ -31,7 +31,7 @@ const FEATURE_TITLES: Record<FeatureId, string> = {
 };
 
 export function App() {
-  const [apiKey, setApiKey] = useState<string>(() => storageGet(API_KEY_STORAGE));
+  const [apiKey, setApiKey] = useState<string>(() => storageGet(API_KEY_STORAGE) || DEMO_API_KEY);
   const [layers, setLayers] = useState<TextLayer[]>([]);
   const [applyingId, setApplyingId] = useState<string | null>(null);
   const [screen, setScreen] = useState<Screen>('home');
@@ -124,12 +124,12 @@ export function App() {
 
   return (
     <div style={styles.root}>
-      <Header
-        onClearKey={clearApiKey}
-        apiKey={apiKey}
-        onBack={screen !== 'home' ? handleBack : undefined}
-        screenTitle={screen !== 'home' ? FEATURE_TITLES[screen] : undefined}
-      />
+      {screen !== 'home' && (
+        <Header
+          onBack={handleBack}
+          screenTitle={FEATURE_TITLES[screen]}
+        />
+      )}
 
       <div style={styles.content}>
         {screen === 'home' && (
@@ -209,13 +209,9 @@ function Header({
           <div style={styles.headerTitle}>
             {screenTitle ?? 'Content check'}
           </div>
-          {!screenTitle && (
-            <div style={styles.headerSubtitle}>MELI Manual de Estilo</div>
-          )}
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-        {isDemo && <span style={styles.demoBadge}>Demo</span>}
         {onClearKey && apiKey && (
           <button
             onClick={onClearKey}
@@ -235,7 +231,6 @@ const styles: Record<string, React.CSSProperties> = {
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '14px',
     color: '#1a1a1a',
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     background: '#fff',
@@ -299,7 +294,6 @@ const styles: Record<string, React.CSSProperties> = {
   },
   content: {
     padding: '16px',
-    flex: 1,
     overflowY: 'auto',
   },
   errorBox: {

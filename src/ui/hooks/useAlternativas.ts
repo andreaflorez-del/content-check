@@ -49,7 +49,7 @@ function detectMessageType(t: string): string {
 function detectIntent(t: string): string {
   const clean = t.replace(/[.!?]$/, '').trim();
   const lower = clean.charAt(0).toLowerCase() + clean.slice(1);
-  if (clean.length <= 70) return `Invitar al usuario a ${lower}`;
+  if (clean.length <= 70) return `Invitar a la persona usuaria a ${lower}`;
   const first = clean.split(/[.!?]/)[0].trim();
   return first.length > 85 ? first.substring(0, 85) + '…' : first;
 }
@@ -142,7 +142,7 @@ function generateVariantsLocally(layer: TextLayer): LayerVariants {
       .trim();
     const cap = v.charAt(0).toUpperCase() + v.slice(1);
     add(V, 'más empático', cap,
-      'Se reemplazó el sujeto del sistema por el usuario directo para mayor cercanía.', original);
+      'Se reemplazó el sujeto del sistema por la persona usuaria para mayor cercanía.', original);
   }
 
   // ── más orientado a beneficio: flip "X para Y" → "Y: X" ──────────────────
@@ -153,7 +153,7 @@ function generateVariantsLocally(layer: TextLayer): LayerVariants {
       const action = m[1].trim();
       const v = `${benefit.charAt(0).toUpperCase() + benefit.slice(1)}: ${action.charAt(0).toLowerCase() + action.slice(1)}`;
       add(V, 'más orientado a beneficio', v,
-        'Se invirtió la estructura para destacar primero el beneficio del usuario.', original);
+        'Se invirtió la estructura para destacar primero el beneficio de la persona usuaria.', original);
     }
   }
 
@@ -178,7 +178,7 @@ REGLAS OBLIGATORIAS:
 3. No inventes beneficios, condiciones ni acciones.
 4. No uses frases vacías ni genéricas.
 5. No hagas el texto más largo si no aporta claridad.
-6. No culpes al usuario.
+6. No culpes a la persona usuaria.
 7. No cambies el tipo de mensaje: CTA, Error, Éxito, Estado vacío, Informativo o Ayuda.
 8. Si el texto ya es claro, mejora solo lo mínimo necesario.
 9. Prioriza lenguaje simple, natural y directo.

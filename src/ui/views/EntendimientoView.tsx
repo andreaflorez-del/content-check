@@ -8,17 +8,18 @@ interface Props {
 }
 
 const CONTENT_TYPES = [
-  'Centro de aprendizaje / Guía educativa',
+  'Nota en la Central de aprendizaje',
   'Pantalla de flujo (onboarding, registro, compra)',
   'Pantalla de error o estado vacío',
   'Modal o tooltip',
   'Email o push notification',
   'Landing o home',
+  'FAQ contextual',
   'Otro',
 ];
 
 const CLARITY_CONFIG = {
-  clear:     { label: 'Claro para el usuario',  bg: '#e8f5e9', color: '#1b5e20', dot: '#43a047', border: '#c8e6c9' },
+  clear:     { label: 'Claro para la persona usuaria',  bg: '#e8f5e9', color: '#1b5e20', dot: '#43a047', border: '#c8e6c9' },
   moderate:  { label: 'Moderadamente claro',    bg: '#fffde7', color: '#f57f17', dot: '#fbc02d', border: '#fff176' },
   confusing: { label: 'Genera confusión',        bg: '#fff0f0', color: '#c62828', dot: '#e53935', border: '#ffcdd2' },
 };
@@ -73,7 +74,7 @@ export function EntendimientoView({ layers, apiKey }: Props) {
         {/* Objective */}
         <div style={styles.field}>
           <label style={styles.label}>
-            ¿Qué queremos que el usuario entienda o haga? <span style={styles.required}>*</span>
+            ¿Qué queremos que la persona usuaria entienda o haga? <span style={styles.required}>*</span>
           </label>
           <textarea
             style={styles.textarea}
@@ -90,7 +91,7 @@ export function EntendimientoView({ layers, apiKey }: Props) {
           <textarea
             style={styles.textarea}
             rows={2}
-            placeholder='Ej: Es parte de la sección de ayuda para vendedores con tienda oficial. El usuario ya tiene cuenta.'
+            placeholder='Ej: Es parte de la sección de ayuda para personas vendedoras con tienda oficial. La persona usuaria ya tiene cuenta.'
             value={context.extraContext}
             onChange={e => setContext(c => ({ ...c, extraContext: e.target.value }))}
           />
@@ -101,7 +102,7 @@ export function EntendimientoView({ layers, apiKey }: Props) {
           style={{ ...styles.continueBtn, opacity: canContinue ? 1 : 0.45, cursor: canContinue ? 'pointer' : 'default' }}
           disabled={!canContinue}
         >
-          Continuar al análisis →
+          Continuar al análisis
         </button>
       </div>
     );
@@ -141,7 +142,7 @@ export function EntendimientoView({ layers, apiKey }: Props) {
     return (
       <div style={styles.loadingState}>
         <span style={styles.spinner} />
-        <p style={styles.loadingText}>Simulando lectura de usuario…</p>
+        <p style={styles.loadingText}>Simulando lectura de la persona usuaria…</p>
       </div>
     );
   }

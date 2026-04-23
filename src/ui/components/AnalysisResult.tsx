@@ -26,6 +26,7 @@ function IssueCard({ issue, layerId, onApply, onHover, applying }: {
   const [isApplied, setIsApplied] = useState(false);
 
   const hasRecommended = Boolean(issue.recommended && issue.recommended.trim());
+  const isGuidance = hasRecommended && /^\[.*\]$/.test(issue.recommended.trim());
 
   function handleMouseEnter() {
     setHovered(true);
@@ -88,10 +89,10 @@ function IssueCard({ issue, layerId, onApply, onHover, applying }: {
         </div>
       )}
 
-      {/* Row 3: Texto o palabra recomendados + CTAs */}
+      {/* Row 3: Recomendación + CTAs */}
       {hasRecommended && (
         <div style={styles.recommendedBlock}>
-          <span style={styles.rowLabel}>Texto o palabra recomendados</span>
+          <span style={styles.rowLabel}>Recomendación</span>
           <div style={styles.recommendedRow}>
             <span style={{
               ...styles.recommendedText,
@@ -99,30 +100,32 @@ function IssueCard({ issue, layerId, onApply, onHover, applying }: {
               fontWeight: isApplied ? 700 : 600,
             }}>"{issue.recommended}"</span>
 
-            {!isApplied ? (
-              <button
-                onClick={handleApply}
-                disabled={applying}
-                style={{
-                  ...styles.applyBtn,
-                  opacity: applying ? 0.6 : 1,
-                  cursor: applying ? 'not-allowed' : 'pointer',
-                }}
-              >
-                {applying ? 'Aplicando…' : 'Aplicar recomendación'}
-              </button>
-            ) : (
-              <button
-                onClick={handleRestore}
-                disabled={applying}
-                style={{
-                  ...styles.restoreBtn,
-                  opacity: applying ? 0.6 : 1,
-                  cursor: applying ? 'not-allowed' : 'pointer',
-                }}
-              >
-                ↩ Restaurar original
-              </button>
+            {!isGuidance && (
+              !isApplied ? (
+                <button
+                  onClick={handleApply}
+                  disabled={applying}
+                  style={{
+                    ...styles.applyBtn,
+                    opacity: applying ? 0.6 : 1,
+                    cursor: applying ? 'not-allowed' : 'pointer',
+                  }}
+                >
+                  {applying ? 'Aplicando…' : 'Aplicar recomendación'}
+                </button>
+              ) : (
+                <button
+                  onClick={handleRestore}
+                  disabled={applying}
+                  style={{
+                    ...styles.restoreBtn,
+                    opacity: applying ? 0.6 : 1,
+                    cursor: applying ? 'not-allowed' : 'pointer',
+                  }}
+                >
+                  ↩ Restaurar original
+                </button>
+              )
             )}
           </div>
         </div>
