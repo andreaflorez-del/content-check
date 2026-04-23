@@ -1,0 +1,8 @@
+{
+  "name": "Content check",
+  "id": "ux-writing-advisor-meli",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma"]
+}
