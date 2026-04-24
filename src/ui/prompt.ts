@@ -353,10 +353,64 @@ Para que un flujo tenga continuidad narrativa:
 - Los errores bien redactados transforman fricción en confianza
 
 ═══════════════════════════════════════════════════════
+FUENTE 5 — CORRECCIÓN LINGÜÍSTICA EN ESPAÑOL
+═══════════════════════════════════════════════════════
+
+Esta fuente aplica las reglas del español correcto con independencia de la marca o el contexto de usabilidad. Antes de evaluar estilo, evalúa si el texto es lingüísticamente correcto.
+
+## ORTOGRAFÍA Y TILDES
+
+- Tildes omitidas o incorrectas: "mas" vs "más", "tu" vs "tú", "el" vs "él", "si" vs "sí"
+- Tildes diacríticas en palabras interrogativas y exclamativas: qué/que, cómo/como, cuándo/cuando, dónde/donde, quién/quien
+- Palabras con b/v, h, ll/y, c/s/z frecuentemente confundidas
+- Uso incorrecto de mayúsculas no justificadas por nombres propios o inicio de oración
+
+## GRAMÁTICA Y CONCORDANCIA
+
+- Concordancia de género: "el nueva función" → "la nueva función"
+- Concordancia de número: "los dato está" → "los datos están"
+- Concordancia sujeto-verbo: el verbo debe concordar en número y persona con el sujeto
+- Uso incorrecto de artículos: "un app" → "una app"
+- Pronombres incorrectos o innecesarios
+
+## CONCORDANCIA EN TIEMPOS VERBALES
+
+- Inconsistencia de tiempos en el mismo mensaje: "Ingresa tu correo y después seleccionaste continuar" → "Ingresa tu correo y selecciona continuar"
+- Mezcla de indicativo e imperativo en instrucciones del mismo nivel jerárquico
+- Saltos injustificados entre presente y pasado en textos descriptivos del mismo bloque
+- En flujos secuenciales, todos los pasos deben estar en el mismo tiempo verbal
+
+## SENTIDO Y COHERENCIA DE LA ORACIÓN
+
+- Oraciones ambiguas o que no tienen sentido completo
+- Texto que contradice la acción que describe ("Cancelar para continuar")
+- Palabras usadas en un contexto semántico incorrecto
+- Oraciones incompletas que dejan la acción o el sujeto sin resolver
+
+## REDUNDANCIAS
+
+- Pleonasmos: "subir arriba", "bajar abajo", "volver atrás"
+- Repetición de la misma idea con diferentes palabras en el mismo texto corto
+- Adjetivos que no agregan información nueva al sustantivo que acompañan
+
+═══════════════════════════════════════════════════════
 INSTRUCCIONES DE ANÁLISIS
 ═══════════════════════════════════════════════════════
 
-Al analizar, aplica las cuatro fuentes de forma complementaria:
+## INFERENCIA DE TIPO DE ELEMENTO — OBLIGATORIA ANTES DE CUALQUIER ANÁLISIS
+
+ANTES de aplicar cualquier regla de cualquier fuente, infiere el tipo de elemento del layer a partir de su contenido y longitud:
+- **Título / encabezado**: texto corto (≤ 60 chars), resume el propósito de la pantalla, sin verbo conjugado en presente de indicativo
+- **CTA / botón**: texto muy corto (≤ 25 chars), verbo en infinitivo o sustantivo de acción
+- **Cuerpo / descripción**: oración completa con sujeto y verbo, puede llevar punto final
+- **Mensaje de error o estado vacío**: menciona algo que salió mal, una restricción o una ausencia de contenido
+- **Label / etiqueta**: identifica un campo o sección, sin verbo conjugado
+- **Texto de ayuda / hint / tooltip**: oración corta que da contexto o instrucción sobre un campo
+
+Regla crítica: las normas de "sin punto final" aplican SOLO a títulos, CTAs y labels — NUNCA a cuerpos de texto, mensajes de ayuda, descripciones completas o mensajes de error con oración completa.
+
+Al analizar, aplica las cinco fuentes de forma complementaria:
+- La corrección lingüística (FUENTE 5) es la base — si hay error de ortografía, gramática o sentido, se reporta siempre independientemente de las demás fuentes
 - Las reglas MELI son específicas para la marca y el idioma español en sus plataformas
 - Los principios NNG (investigación) son evidencia universal sobre comportamiento de usuarios
 - Las 10 Heurísticas de Nielsen evalúan la usabilidad del copy: visibilidad, consistencia, prevención de errores, etc.
@@ -365,7 +419,7 @@ Al analizar, aplica las cuatro fuentes de forma complementaria:
 - Cuando aplica una heurística, citar el número y nombre (ej: "H9 — Recuperación de errores")
 - Cuando aplica el storytelling, evaluar si el copy crea un viaje coherente y emocionalmente resonante
 - Cuando solo aplica una fuente, citarla explícitamente en la "explanation"
-- En la "explanation" indicar si el problema lo detecta MELI, NNG, Heurística Nielsen, Storytelling, o una combinación
+- En la "explanation" indicar si el problema lo detecta Lingüística, MELI, NNG, Heurística Nielsen, Storytelling, o una combinación
 
 ## FORMATO DE RESPUESTA
 

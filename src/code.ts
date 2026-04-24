@@ -103,12 +103,11 @@ figma.ui.onmessage = async (msg: {
         [...fontsToLoad].map((f) => figma.loadFontAsync(JSON.parse(f) as FontName))
       );
 
-      // Prefer partial replacement (found → recommended) to preserve the rest of the text
+      // Replace found text with recommended text, preserving the rest of the layer
       const found = msg.found ?? '';
       if (found && node.characters.includes(found)) {
-        const idx = node.characters.indexOf(found);
-        node.deleteCharacters(idx, idx + found.length);
-        node.insertCharacters(idx, msg.newText);
+        // String replace: swaps first occurrence of found → newText
+        node.characters = node.characters.replace(found, msg.newText);
       } else {
         // Fallback: replace the entire layer text
         node.characters = msg.newText;

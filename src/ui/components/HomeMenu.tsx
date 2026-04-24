@@ -8,6 +8,7 @@ const FEATURES: Array<{
   title: string;
   description: string;
   hint: string;
+  wip?: boolean;
 }> = [
   {
     id: 'analizar',
@@ -22,6 +23,7 @@ const FEATURES: Array<{
     title: 'Generar alternativas de texto',
     description: 'Crea variantes con distintos tonos y jerarquías',
     hint: 'Selecciona un layer de texto',
+    wip: true,
   },
   {
     id: 'storytelling',
@@ -29,6 +31,7 @@ const FEATURES: Array<{
     title: 'Analizar storytelling',
     description: 'Evalúa la coherencia narrativa de un flujo completo',
     hint: 'Selecciona un board con un flujo',
+    wip: true,
   },
   {
     id: 'entendimiento',
@@ -36,6 +39,7 @@ const FEATURES: Array<{
     title: 'Evaluar entendimiento',
     description: 'Simula cómo una persona usuaria lee tu pantalla',
     hint: 'Selecciona un componente o pantalla',
+    wip: true,
   },
 ];
 
@@ -64,7 +68,10 @@ export function HomeMenu({ onSelect, layerCount }: Props) {
           >
             <span style={styles.cardIcon}>{f.icon}</span>
             <div style={styles.cardBody}>
-              <div style={styles.cardTitle}>{f.title}</div>
+              <div style={styles.cardTitleRow}>
+                <div style={styles.cardTitle}>{f.title}</div>
+                {f.wip && <span style={styles.wipPill}>Próximamente</span>}
+              </div>
               <div style={styles.cardDesc}>{f.description}</div>
             </div>
             <span style={styles.arrow}>›</span>
@@ -120,10 +127,26 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: 'column',
     gap: '2px',
   },
+  cardTitleRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
   cardTitle: {
     fontSize: '13px',
     fontWeight: 700,
     color: '#1a1a1a',
+  },
+  wipPill: {
+    fontSize: '10px',
+    fontWeight: 600,
+    color: '#888',
+    background: '#f0f0f0',
+    border: '1px solid #ddd',
+    borderRadius: '10px',
+    padding: '1px 7px',
+    whiteSpace: 'nowrap' as const,
+    flexShrink: 0,
   },
   cardDesc: {
     fontSize: '12px',
